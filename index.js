@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consoleTable = require('console.table');
 
+// Gives options for interaction with database
 const promptMessages = {
     viewAllEmployees: "View All Employees",
     viewByDepartment: "View All Employees By Department",
@@ -23,8 +24,8 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(err => {
-    //Will keep attempting to throw err, removing this allows the program to work just fine
-    //if (err) throw err;
+    // Will keep attempting to output err, removing this allows the program to work just fine
+    // if (err) throw err;
     prompt();
 });
 
@@ -45,4 +46,65 @@ function prompt() {
                 promptMessages.exit
             ]
         })
+        .then(answer => {
+            console.log('answer', answer);
+            switch (answer.action) {
+                case promptMessages.viewAllEmployees:
+                    viewAllEmployees();
+                    break;
+
+                case promptMessages.viewByDepartment:
+                    viewByDepartment();
+                    break;
+
+                case promptMessages.viewByManager:
+                    viewByManager();
+                    break;
+
+                case promptMessages.addEmployee:
+                    addEmployee();
+                    break;
+
+                case promptMessages.removeEmployee:
+                    remove('delete');
+                    break;
+
+                case promptMessages.updateRole:
+                    remove('role');
+                    break;
+
+                case promptMessages.viewAllRoles:
+                    viewAllRoles();
+                    break;
+
+                case promptMessages.exit:
+                    connection.end();
+                    break;
+            }
+        });  
+}
+
+// Adds employee to database
+async function addEmployee() {
+    const addname = await inquirer.prompt(askName());
+    connection.query('SELECT role.id, role.title FROM role ORDER BY role.id;', async (err, res) => {
+        if (err) throw err;
+    });
+
+}
+
+// Function to allow adding name of new employee
+function askName() {
+    return ([
+        {
+            name: "first",
+            type: "input",
+            message: "Enter the first name: "
+        },
+        {
+            name: "last",
+            type: "input",
+            message: "Enter the last name: "
+        }
+    ]);
 }
