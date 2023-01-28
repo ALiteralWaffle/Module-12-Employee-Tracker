@@ -6,8 +6,6 @@ const consoleTable = require('console.table');
 // Gives options for interaction with database
 const promptMessages = {
     viewAllEmployees: "View All Employees",
-    viewByDepartment: "View All Employees By Department",
-    viewByManager: "View All Employees By Manager",
     addEmployee: "Add An Employee",
     removeEmployee: "Remove An Employee",
     updateRole: "Update Employee Role",
@@ -37,8 +35,6 @@ function prompt() {
             message: 'What would you like to do?',
             choices: [
                 promptMessages.viewAllEmployees,
-                promptMessages.viewByDepartment,
-                promptMessages.viewByManager,
                 promptMessages.viewAllRoles,
                 promptMessages.addEmployee,
                 promptMessages.removeEmployee,
@@ -51,14 +47,6 @@ function prompt() {
             switch (answer.action) {
                 case promptMessages.viewAllEmployees:
                     viewAllEmployees();
-                    break;
-
-                case promptMessages.viewByDepartment:
-                    viewByDepartment();
-                    break;
-
-                case promptMessages.viewByManager:
-                    viewByManager();
                     break;
 
                 case promptMessages.addEmployee:
