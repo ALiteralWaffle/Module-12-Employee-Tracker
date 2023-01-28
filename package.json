@@ -1,4 +1,16 @@
 {
+  "name": "mod12-employee-tracker",
+  "version": "1.0.0",
+  "description": "A program that allows the viewing of Employees within a company and the ability to manage their roles within said company.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ALiteralWaffle/Module-12-Employee-Tracker"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALiteralWaffle/Module-12-Employee-Tracker/issues"
+  },
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^8.2.4",
